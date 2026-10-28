@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWA — Study With Animal</title>
+  
+  <!-- Fonts & External Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  
+  <!-- CSS Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="w-full">
+  <div class="app-shell w-full">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
+      
+      <!-- Header -->
+      <header class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <p class="canva-text font-bold tracking-widest uppercase eyebrow-text">CÂU LẠC BỘ NHÀ THÁM HIỂM NHÍ</p>
+          <h1 class="canva-text font-bold app-title-text">SWA · Study With Animal</h1>
+        </div>
+        <button id="sound-toggle" class="secondary" type="button" aria-pressed="true">🔊 Âm thanh: bật</button>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="flex flex-wrap gap-2 mb-8" aria-label="Điều hướng chính">
+        <button class="canva-button nav-button" data-view="lobby" type="button">🏠 Sảnh khám phá</button>
+        <button class="canva-button nav-button" data-view="map" type="button">🗺️ Bản đồ</button>
+        <button class="canva-button nav-button" data-view="album" type="button">🃏 Bộ sưu tập</button>
+        <button class="canva-button nav-button" data-view="report" type="button">📋 Báo cáo phụ huynh</button>
+      </nav>
+
+      <!-- Main Content -->
+      <main>
+        <!-- Welcome Screen -->
+        <section id="welcome" class="screen" aria-labelledby="welcome-title">
+          <div class="canva-panel paper rounded-[32px] p-7 sm:p-12 flex flex-col md:flex-row items-center gap-8">
+            <div class="text-6xl text-center leading-tight" aria-hidden="true">
+              🦊 🐼<br>🦎 🦭
+            </div>
+            <div>
+              <span class="badge mb-4">✦ STUDY WITH ANIMAL ✦</span>
+              <h2 id="welcome-title" class="canva-text font-bold leading-tight mb-4 section-title-text">CHÀO MỪNG CÁC EM ĐẾN VỚI SWA!</h2>
+              <p class="canva-text leading-relaxed mb-6 body-text">Học tiếng Anh qua 50 chặng và 1.000 câu hỏi. Mỗi chặng vượt qua sẽ tặng đúng một thẻ linh vật hiếm!</p>
+              <button id="welcome-start" type="button" class="canva-button primary button-text">Bắt đầu khám phá →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lobby Screen -->
+        <section id="lobby" class="screen" hidden aria-labelledby="lobby-heading">
+          <div class="paper rounded-[30px] p-7 sm:p-10 mb-6">
+            <span class="badge">🌱 SWA CLUB</span>
+            <h2 id="lobby-heading" class="canva-text font-bold mt-4 mb-3 section-title-text">Mỗi ngày một hành trình thú vị</h2>
+            <p class="canva-text mb-6 body-text">50 chặng, mỗi chặng 20 câu và đúng 1 linh vật chờ được mở khóa.</p>
+            <div class="grid sm:grid-cols-3 gap-4 mb-7">
+              <div class="bg-[#e7f1df] rounded-2xl p-5">
+                <span class="block font-semibold">Chặng hoàn thành</span>
+                <strong id="lobby-stages" class="text-3xl" aria-live="polite">0/50</strong>
+              </div>
+              <div class="bg-[#fcebad] rounded-2xl p-5">
+                <span class="block font-semibold">Điểm tích lũy</span>
+                <strong id="lobby-points" class="text-3xl" aria-live="polite">0</strong>
+              </div>
+              <div class="bg-[#f8e3d3] rounded-2xl p-5">
+                <span class="block font-semibold">Thẻ đã mở</span>
+                <strong id="lobby-badges" class="text-3xl" aria-live="polite">0/50</strong>
+              </div>
+            </div>
+            <button type="button" class="canva-button primary button-text" data-view="map">Khám phá bản đồ →</button>
+          </div>
+          <div class="paper rounded-[26px] p-6">
+            <h3 class="canva-text font-bold mb-2 sub-heading-text">Phần thưởng dành cho nhà thám hiểm</h3>
+            <p class="canva-text body-text">Mỗi câu đúng được 5 điểm. Đúng ít nhất 14/20 câu để nhận đúng 1 thẻ linh vật của chặng và mở chặng tiếp theo!</p>
+          </div>
+        </section>
+
+        <!-- Map Screen -->
+        <section id="map" class="screen" hidden aria-labelledby="map-heading">
+          <h2 id="map-heading" class="canva-text font-bold section-title-text">Bản đồ hành trình · 50 chặng</h2>
+          <p class="canva-text mt-2 mb-6 body-text">Mỗi nhóm có 10 chặng. Học từ vựng, ngữ pháp, nghe, giao tiếp và luyện viết theo cấp độ tăng dần.</p>
+          <p id="map-progress" class="badge mb-5" aria-live="polite"></p>
+          <div class="map-board">
+            <div id="stage-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+          </div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="game" class="screen" hidden aria-labelledby="game-heading">
+          <button type="button" class="canva-button secondary mb-6 button-text" data-view="map">← Về bản đồ</button>
+          <div class="paper rounded-[30px] p-6 sm:p-10 max-w-3xl mx-auto">
+            <div class="flex justify-between flex-wrap gap-3 mb-5">
+              <span id="game-stage" class="badge"></span>
+              <span id="game-score" class="font-bold" aria-live="polite"></span>
+            </div>
+            <div id="progress" class="h-3 rounded-full bg-[#e8eddf] overflow-hidden mb-6" role="progressbar" aria-label="Tiến độ bài tập" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0">
+              <div id="progress-fill" class="h-full bg-[#f6c957] transition-all duration-300" style="width:0%"></div>
+            </div>
+            <h2 id="game-heading" class="canva-text font-bold mb-2 section-title-text">Cùng giải câu hỏi nhé!</h2>
+            <p id="question-kind" class="badge mb-4"></p>
+            <p id="question-prompt" class="font-semibold mb-5" aria-live="polite"></p>
+            
+            <div id="options" class="space-y-3"></div>
+            
+            <form id="writing-form" hidden>
+              <label class="canva-text block font-semibold mb-2 label-text" for="writing-answer">Viết đáp án tiếng Anh của em</label>
+              <input id="writing-answer" class="w-full rounded-xl border-2 border-[#a6bca5] p-3 mb-3" autocomplete="off" spellcheck="false">
+              <button class="canva-button primary button-text" type="submit">Kiểm tra đáp án</button>
+            </form>
+            
+            <div id="audio-tools" class="flex flex-wrap gap-3 mt-6" hidden>
+              <button id="listen-button" type="button" class="canva-button secondary button-text">🔊 Nghe câu tiếng Anh</button>
+              <button id="stop-button" type="button" class="canva-button secondary button-text">■ Dừng nghe</button>
+            </div>
+            <p id="audio-message" class="mt-3" role="status"></p>
+            <div id="feedback" class="mt-6 rounded-2xl bg-[#e9f2e2] p-4 font-bold" role="status" hidden></div>
+            <button id="next-button" type="button" class="canva-button primary mt-6 button-text" hidden>Tiếp tục →</button>
+          </div>
+        </section>
+
+        <!-- Result Screen -->
+        <section id="result" class="screen" hidden aria-labelledby="result-heading">
+          <div class="paper rounded-[30px] p-8 sm:p-12 max-w-xl mx-auto text-center">
+            <div class="text-7xl mb-5" aria-hidden="true">🌟</div>
+            <h2 id="result-heading" class="canva-text font-bold mb-3 section-title-text">Kết quả hành trình</h2>
+            <p id="result-score" class="font-bold mb-3" aria-live="polite"></p>
+            <p id="result-message" class="mb-5"></p>
+            <p id="result-reward" class="badge mb-7"></p>
+            <div class="flex justify-center gap-3 flex-wrap">
+              <button id="retry-button" type="button" class="canva-button secondary button-text">Chơi lại</button>
+              <button type="button" class="canva-button primary button-text" data-view="map">Về bản đồ</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Album Screen -->
+        <section id="album" class="screen" hidden aria-labelledby="album-heading">
+          <h2 id="album-heading" class="canva-text font-bold mb-3 section-title-text">Album 50 linh vật hiếm</h2>
+          <p class="canva-text mb-5 body-text">Hoàn thành từng chặng để mở đúng một thẻ của chặng đó. Chạm vào thẻ đã mở để tìm hiểu thêm!</p>
+          <div id="album-filters" class="flex flex-wrap gap-2 mb-6" role="group" aria-label="Lọc thẻ theo lớp">
+            <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">Tất cả · 50</button>
+          </div>
+          <p id="album-count" class="font-semibold mb-4" aria-live="polite"></p>
+          <div id="album-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+          <div id="album-detail" class="paper rounded-2xl p-5 mt-6" role="status" hidden></div>
+        </section>
+
+        <!-- Report Screen -->
+        <section id="report" class="screen" hidden aria-labelledby="report-heading">
+          <div class="paper rounded-[30px] p-6 sm:p-10 max-w-3xl mx-auto">
+            <h2 id="report-heading" class="canva-text font-bold mb-3 section-title-text">Góc báo cáo dành cho phụ huynh</h2>
+            <p class="canva-text mb-5 body-text">Xem điểm số, các chặng đã hoàn thành và số thẻ đã mở trong phiên học này. Hãy cùng khen ngợi nỗ lực của em!</p>
+            <div id="report-summary" class="rounded-2xl bg-[#e7f1df] p-5 whitespace-pre-line font-semibold mb-7" aria-live="polite"></div>
+            
+            <label class="canva-text block font-bold mb-2 label-text" for="parent-phone">Số điện thoại phụ huynh / số liên kết Zalo</label>
+            <input id="parent-phone" type="tel" inputmode="tel" autocomplete="tel" class="w-full rounded-xl border-2 border-[#a6bca5] p-3 mb-3" aria-describedby="phone-help">
+            <p id="phone-help" class="canva-text mb-5 body-text">Chỉ nhập số khi phụ huynh muốn tự gửi báo cáo qua SMS hoặc mở liên hệ Zalo.</p>
+            
+            <div class="flex flex-wrap gap-3">
+              <button id="sms-button" type="button" class="canva-button primary button-text">Mở tin nhắn SMS</button>
+              <button id="zalo-button" type="button" class="canva-button secondary button-text">Sao chép & mở Zalo</button>
+              <button id="copy-button" type="button" class="canva-button secondary button-text">Sao chép báo cáo</button>
+            </div>
+            
+            <p class="canva-text block mt-5 footer-text">Báo cáo không được gửi tự động. Phụ huynh cần kiểm tra người nhận và tự nhấn Gửi trong SMS hoặc Zalo. Kết quả chỉ thuộc phiên học đang mở.</p>
+            <p id="report-status" class="mt-3 font-bold" role="status"></p>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="pt-12 text-center">
+        <p class="canva-text footer-text">Học từng chút một · Vui thật nhiều 🌱</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
